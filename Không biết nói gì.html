@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Chúc mừng sinh nhật</title>
+
+<style>
+    body {
+        background: linear-gradient(270deg, #ff9a9e, #fad0c4, #fbc2eb);
+        background-size: 600% 600%;
+        animation: bgMove 15s ease infinite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+    }
+
+    @keyframes bgMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .card {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+        width: 360px;
+        text-align: center;
+        z-index: 2;
+    }
+
+    h1 { color: #ff4d6d; }
+
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        background-color: #ff4d6d;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover { background-color: #e63950; }
+
+    /* ===== MODAL ===== */
+    .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.6s ease;
+        z-index: 10;
+    }
+
+    .overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .modal {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        width: 80%;
+        max-width: 500px;
+        max-height: 80vh;
+        overflow-y: auto;
+        text-align: left;
+        line-height: 1.6;
+        transform: scale(0.7);
+        transition: transform 0.6s ease;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .overlay.show .modal {
+        transform: scale(1);
+    }
+
+    .close {
+        text-align: right;
+        cursor: pointer;
+        font-weight: bold;
+        color: #ff4d6d;
+        margin-bottom: 10px;
+    }
+
+    /* confetti */
+    .confetti {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+        from { transform: translateY(-50px) rotate(0deg); }
+        to { transform: translateY(110vh) rotate(360deg); }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>🎉 Eyyo, what's up? 🎂</h1>
+    <p>Đây là lời chúc đến từ một đứa đang vật vã với cuộc sống học y của nó 💖</p>
+    <button onclick="openWish()">Nhận lời chúc tại đây nèee 🎁</button>
+</div>
+
+<!-- MODAL LỜI CHÚC -->
+<div class="overlay" id="overlay">
+    <div class="modal">
+        <div class="close" onclick="closeWish()">✖ Đóng</div>
+
+        🎂 Chúc bạn tao tuổi mới khỏe mạnh, hạnh phúc, thành công và đặc biệt là phải luôn luôn vui vẻ nha.<br><br>
+
+        Mày có thể buồn, có thể khóc, có thể đau khổ nhưng phải mau chóng tìm lại niềm vui và hạnh phúc của mình nè.<br><br>
+
+        Tuổi 18 mong mày vẫn luôn là mày, luôn mỏ hỗn, luôn chặn họng được tao và luôn có thể làm được những gì mày muốn.<br><br>
+
+        Quà thì dạo này bận quá chưa có thời gian gói nên nào rảnh tao đưa mày sau haaaa 😆<br><br>
+
+        Ờ còn đoạn code này thì dân nghiệp dư chỉ có thể làm được như vầy thuiii,
+        à với tao chúc giờ này cũng có ý nghĩa đó nhaaa =)))<br><br>
+
+        💖 Rồi cuối cùng là Happy Birthday, Merry Christmas, Happy New Year and wish you all the best nhaaa!!!
+    </div>
+</div>
+
+<script>
+    function openWish() {
+        document.getElementById("overlay").classList.add("show");
+
+        // confetti
+        for (let i = 0; i < 120; i++) {
+            createConfetti();
+        }
+    }
+
+    function closeWish() {
+        document.getElementById("overlay").classList.remove("show");
+    }
+
+    function createConfetti() {
+        const c = document.createElement("div");
+        c.className = "confetti";
+
+        const colors = ["#ff4d6d", "#ffd166", "#06d6a0", "#118ab2", "#9b5de5"];
+        c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        c.style.left = Math.random() * window.innerWidth + "px";
+        c.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 5000);
+    }
+</script>
+
+</body>
+</html>
